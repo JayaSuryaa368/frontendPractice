@@ -1,0 +1,73 @@
+.split{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.chess-pieces{
+    box-sizing: border-box;
+    width: 10rem;
+    height: 1.5rem;
+    background-color: blue;
+    cursor: pointer;
+}
+
+.chess-pieces:hover{
+    background-color: burlywood;
+    transition: transform 0.2s ease;
+}
+
+.table{
+    margin: 10px;
+    padding-left: 50px;
+    border-collapse: collapse;
+    border-spacing: 0; 
+    cursor: pointer;
+}
+
+.box{
+    width : 4rem;
+    height: 4rem;
+    border: 1px solid black;
+    text-align: center;
+    color: teal;
+}
+
+.white{
+    background-color: whitesmoke;
+}
+
+.black{
+    background-color: black;
+}
+
+.dialog-box{
+    position: absolute;
+    top: 150px;
+    left:5px;
+    right: 100px;
+    bottom: 50px;
+    width: 10rem;
+    height: 6rem;
+    background-color: red;
+    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 3px;
+    justify-content: center;
+}
+.okBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.okbtn{
+
+    background-color: rgb(13, 216, 115);
+}
+
+.teal{
+    background-color: teal;
+}

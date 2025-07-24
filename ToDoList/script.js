@@ -7,6 +7,7 @@ const body = document.querySelector("body");
 // making dialog appear
 plusIcon.addEventListener("click",function(){
     console.log("clicked the plus icon");
+    generateTaskID();
     dialogboxitem.style.display= "flex";
 })
 
@@ -26,19 +27,30 @@ addTask.addEventListener("click",function(event){
         console.log("the drop down value is "+dropdownText);
         const taskAdded=document.querySelector(".text-area");
         const taskText=taskAdded.value.trim();
+        console.log("the length is "+taskText.length);
         console.log("the task added --- : "+taskAdded);
-        console.log("the task is "+task);
-        if(dropdownText != null && taskText != null){
+        console.log("the task is ---"+taskText + "--");
+        if(dropdownText === "none"){
+            dropdownText="Daily";
+        }
+        if(taskText.length != 0){
             console.log("in if condition");
             // adding a element to to do container
-            taskAdder(dropdownText,taskText,task);
+            let ch=dropdownText.charAt(0).toUpperCase();
+            let taskID=ch+generateTaskID();
+            console.log("the task ID is -- "+taskID);
+            taskAdder(dropdownText,taskText,taskID);
             task+=1;
             updateToDoCount();
+            // resetting the dialog box contents to default
+            dropdown.selectedIndex=0;
+            taskAdded.value="";
+            dialogboxitem.style.display= "none";
         }
-        // resetting the dialog box contents to default
-        dropdown.selectedIndex=0;
-        taskAdded.value="";
-        dialogboxitem.style.display= "none";
+        else{
+            window.alert("Please enter task description.");
+        }
+        
 })
 function updateToDoCount(){
     let todoTaskCount=document.querySelectorAll(".taskholder");
@@ -51,6 +63,8 @@ function taskAdder(taskType,taskText,taskNumber){
     let task=document.createElement("div");
     
     taskContainer.classList.add("taskholder");
+    taskContainer.setAttribute("draggable","true");
+    taskContainer.at
     type.classList.add("task-type");
     task.classList.add("task-area");
     type.innerText=taskNumber+" "+taskType;
@@ -112,7 +126,7 @@ function handleEdit(){
             closeEditIcon.addEventListener("click", () => {
                 body.removeChild(editboxCreated);
             });
-
+            // let checkeditedtaskText=editboxCreated.querySelector(".edit-text-area");
             let updateButton=editboxCreated.querySelector(".update");
             // if click on update update the parent task and hides the edit box
             updateButton.addEventListener("click",function(e){
@@ -125,11 +139,18 @@ function handleEdit(){
                 console.log("the updated dd = "+editedDDvalue.value)
                 let editedtaskText=editboxCreated.querySelector(".edit-text-area");
                 console.log("the update task = "+editedtaskText.value);
-                //update parent element where we get the previous added value -- before edit value
-                updateselectedTaskTypeEl.innerText=selectedTaskNumber+" "+editedDDvalue.value;
-                updateselectedTaskTextEl.innerText=editedtaskText.value;
-                // editboxCreated.style.display="none";
-                body.removeChild(editboxCreated);
+                console.log("before empty check");
+                if(editedtaskText.value.length < 1){
+                    window.alert("Task text should not be empty");
+                }
+                else{
+                    //update parent element where we get the previous added value -- before edit value
+                    updateselectedTaskTypeEl.innerText=selectedTaskNumber+" "+editedDDvalue.value;
+                    updateselectedTaskTextEl.innerText=editedtaskText.value;
+                    // editboxCreated.style.display="none";
+                    body.removeChild(editboxCreated);
+                }
+                
              });
         }
     });
@@ -174,7 +195,7 @@ function createEditTaskDialogBox(taskType,taskText){
 let  dropdownNode=document.querySelector(".todo-options");
 dropdownNode.addEventListener("change",function(e){
     let sortValueElement=e.target;
-    console.log(sortValueElement.value+ " the dd value");
+    console.log(sortValueElement.value+ " the expected dd value");
     let selectedSortingValue=sortValueElement.value;
     let allToDoTasks=document.querySelectorAll(".taskholder");
     for(let i=0;i<allToDoTasks.length;i++){
@@ -193,3 +214,21 @@ dropdownNode.addEventListener("change",function(e){
         }
     }
 })
+
+
+function generateTaskID(){
+    const chars = "ABCEFGHIJKLNOPQRSTUVXYZ";
+    const numbers="123456789";
+    let taskID="";
+    for(let i=0;i<3;i++){
+        taskID+=numbers.charAt(Math.random()*9);
+        console.log(taskID);
+    }
+    for(let i=0;i<3;i++){
+        taskID+=chars.charAt(Math.random()*chars.length);
+        console.log(taskID);
+    }
+
+    return taskID;
+    
+}
