@@ -13,6 +13,9 @@
 <body>
   <div class="container">
   <h1>To Do List</h1>
+  <div class="progressbar">
+    <div class="progressbarcolor"></div>
+  </div>
   <div class="task-status"> 
     <div class="total-todo">ToDo 
       <div class="todocount"> 0 </div>
@@ -44,13 +47,13 @@
           </select>
         </span>
       </div> 
-      <div class="todoadded"> </div>
+      <div class="todoadded"></div>
     </div>
     <div class="in-progress"> 
       <div class="section-title">
         <span>In Progress</span>
         <span class="sorttask">
-          <select>
+          <select class="inprogress-options">
             <option value="sort by" selected disabled hidden>All</option>
             <option value="all">All</option>
             <option value="daily">Daily</option>
@@ -59,13 +62,13 @@
           </select>
         </span>
       </div>
-    <div class="inprogress"> </div>
+      <div class="inprogress"></div>
     </div>
     <div class="finished">
       <div class="section-title">
         <span>Finished</span>
         <span class="sorttask">
-          <select>
+          <select class="finished-options">
             <option value="sort by" selected disabled hidden>All</option>
             <option value="all">All</option>
             <option value="daily">Daily</option>
